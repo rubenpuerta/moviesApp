@@ -1,0 +1,15 @@
+- name: GitHub Deployments
+  uses: bobheadxi/deployments@v0.4.2
+  with:
+    # GitHub token
+    token: 
+    # One of 'start' and 'finish'
+    step: 
+    # Set auto_inactive (see https://developer.github.com/v3/repos/deployments/#inactive-deployments)
+    auto_inactive: # optional
+    # URL to logs
+    logs: # optional
+    # Description to set in status
+    desc: # optional
+    # The git ref to use for the deploy, defaults to github.ref
+    ref: # optional
