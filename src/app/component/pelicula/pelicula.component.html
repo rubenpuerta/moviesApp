@@ -1,0 +1,68 @@
+<div class="container-fluid" *ngIf="pelicula">
+    <div class="row justify-content-between">
+        <h1>{{pelicula.title}}</h1>
+        <button class="btn btn-outline-danger" (click)="volver()">
+            <i class="fas fa-backward"></i>
+            Volver</button>
+    </div>
+    <hr>
+    <div class="row justify-content-start" background-image="no">
+        <div class="col-md-4">
+            <img class="w-100" [src]="pelicula.poster_path | imagen " alt="Poster de la pelicula {{pelicula.title}} ">
+            <ul class="list-group">
+                <li class="list-group-item text-center">Popularidad: {{pelicula.popularity}}</li>
+                <li class="list-group-item text-center">Estreno: {{pelicula.release_date | date: 'd/MMMM/yyyy'}}</li>
+                <li *ngIf="pelicula.belongs_to_collection" class="list-group-item">
+                    <a class="btn btn-outline-secondary btn-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        {{pelicula.belongs_to_collection.name}}
+                    </a>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <img class="img-thumbnail" [src]="pelicula.belongs_to_collection.poster_path | imagen" [alt]="pelicula.belongs_to_collection.name">
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item text-center">Media votos: {{pelicula.vote_average}}</li>
+                <li class="list-group-item text-center">Número de votos: {{pelicula.vote_count}}</li>
+                <li *ngIf="pelicula.homepage" class="list-group-item"><a class="btn btn-outline-secondary btn-block" [href]="pelicula.homepage" target="_blank" role="button"><i class="fas fa-link"></i> Web de la película</a></li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Sinopsis</h3>
+                    <p class="text-justify">{{pelicula.overview}}</p>
+                    <div *ngIf="_mDB.generos">
+                        <span class="badge badge-pill badge-secondary mb-2 mr-1" *ngFor="let genero of pelicula.genres | generos:_mDB.generos:true">{{genero}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <img *ngIf="pelicula.backdrop_path" class="align-self-center w-100 rounded" [src]="pelicula.backdrop_path | imagen">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="badge badge-light">{{pelicula.tagline}}</span>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12" *ngIf="pelicula.production_companies.length > 0">
+                    <h3 *ngIf="pelicula.production_companies.length === 1 ">Productora</h3>
+                    <h3 *ngIf="pelicula.production_companies.length > 1 ">Productoras</h3>
+                    <hr>
+                    <div class="card-columns">
+                        <div class="card" *ngFor="let productora of pelicula.production_companies">
+                            <img class="card-img-top" *ngIf="productora.logo_path" [src]="productora.logo_path | imagen">
+                            <div class="card-body">
+                                <h5 class="card-title">{{productora.name}}</h5>
+                                <p *ngIf="productora.origin_country" class="card-text">Pais: {{productora.origin_country}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

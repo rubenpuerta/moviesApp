@@ -1,0 +1,29 @@
+<div class="input-group mb-3">
+    <input (keyup.enter)="buscar(texto)" [(ngModel)]="texto" name="search" type="text" class="form-control" placeholder="Busca una película" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <div class="input-group-append h-100">
+        <button (click)="buscar(texto)" class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+    </div>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>
+<div *ngIf="!loading">
+    <div class="row align-content-between" *ngIf="_mDB.filmPages > 1 && peliculas">
+        <div class="col-md-8">
+            <h1>Resultado de la busqueda</h1>
+        </div>
+        <div class="col-md-4">
+            <app-paginacion (paginaAct)="buscar(texto, $event)" [origen]="'search'" [pagina]="paginaActual"></app-paginacion>
+        </div>
+    </div>
+    <div class="row" *ngIf="peliculas === null">
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                No se han encontrado películas con ese texto
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+    <app-tarjetas [items]="peliculas" [origen]="'search'" [busqueda]="texto" [pagina]="paginaActual"></app-tarjetas>
+</div>

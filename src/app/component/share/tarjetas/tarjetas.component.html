@@ -1,0 +1,12 @@
+<div class="card-columns">
+    <div class="card" *ngFor="let pelicula of items">
+        <a class="btn btn-light stretched-link text-left" [routerLink]="['/film', pelicula.id, origen, busqueda, pagina]">
+            <img [src]="pelicula.poster_path | imagen" class="card-img-top" alt="Poster de la película {{pelicula.title}}">
+            <div class="card-body">
+                <h5 class="card-title">{{pelicula.title}}</h5>
+                <span class="badge badge-pill badge-secondary mb-2 mr-1" *ngFor="let genero of pelicula.genre_ids | generos:_mDB.generos">{{genero}}</span>
+                <p class="card-text">{{pelicula.overview | recortaPalabras:30}}</p>
+            </div>
+        </a>
+    </div>
+</div>

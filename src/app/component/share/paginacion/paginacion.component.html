@@ -1,0 +1,13 @@
+<nav>
+    <ul class="pagination justify-content-end cursorPointer">
+        <li class="page-item" [ngClass]="{'disabled':cmdAnterior, 'cursorNo':cmdAnterior}">
+            <a class="page-link" (click)="cargaPagina('<')">Anterior</a>
+        </li>
+        <li class="page-item" [ngClass]="{'active': paginaActual==pagina1}"><a class="page-link" (click)="cargaPagina(pagina1)">{{pagina1}}</a></li>
+        <li *ngIf="_mDB.filmPages >= 2" class="page-item" [ngClass]="{'active': paginaActual==pagina2}"><a class="page-link" (click)="cargaPagina(pagina2)">{{pagina2}}</a></li>
+        <li *ngIf="_mDB.filmPages >= 3" class="page-item" [ngClass]="{'active': paginaActual==pagina3}"><a class="page-link" (click)="cargaPagina(pagina3)">{{pagina3}}</a></li>
+        <li class="page-item" [ngClass]="{'disabled':cmdSiguiente, 'cursorNo':cmdSiguiente}">
+            <a class="page-link" (click)="cargaPagina('>')">Siguiente</a>
+        </li>
+    </ul>
+</nav>
