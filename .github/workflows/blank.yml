@@ -1,0 +1,11 @@
+- name: Blazing fast GitHub Pages deploys
+  uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
+  with:
+    # The personal access token secret can be passed in using {{ secrets.GH_PAT }}
+    repo-token: 
+    # The directory for the built website
+    site-directory: # default is _site
+    # The branch to deploy the built website to
+    deploy-branch: # default is gh-pages
+    # The commit message for the branch
+    commit-message: # optional, default is Deployed using Blazing fast GitHub Pages deploy
